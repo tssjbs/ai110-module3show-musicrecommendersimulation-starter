@@ -21,16 +21,11 @@ Prompts:
 
 ## 3. How the Model Works  
 
-Explain your scoring approach in simple language.  
+The recommender is a **rule-based content filter**, not a machine-learning model. Each song in the CSV is treated like a row of tags and numbers (genre, mood, energy, valence, danceability, acousticness). The user picks a favorite genre, mood, and target energy level (plus whether they prefer acoustic tracks).
 
-Prompts:  
+For every song, the program starts at zero points and adds credit when the song lines up with those choices: a matching genre is worth the most, a matching mood is worth less, and closeness in energy adds a sliding bonus (almost a match beats a song that is way too calm or too intense). Optional extras reward acoustic songs for acoustic-loving users and valence alignment for chill or relaxed moods.
 
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+After every song has a total score, the system sorts the catalog from highest to lowest and prints the top few picks in the terminal, along with short “because …” reasons so you can see which rules fired. This replaces the starter placeholders with a full **CLI-first** pipeline: load CSV → score → rank → explain.
 
 ---
 
